@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<!-- The contents of this file will be loaded for each web application -->
+<Context>
+    <!-- Default set of monitored resources. If one of these changes, the    -->
+    <!-- web application will be reloaded.                                   -->
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+    <WatchedResource>${catalina.base}/conf/web.xml</WatchedResource>
+
+    <Resource name="jdbc/restaurant_voiting"
+              auth="Container"
+              type="javax.sql.DataSource"
+              url="jdbc:postgresql://localhost:5432/restaurant_voiting"
+              username="user"
+              password="password"
+              driverClassName="org.postgresql.Driver"
+              validationQuery="SELECT 1"
+              maxTotal="100"
+              minIdle="2"
+              maxWaitMillis="20000"
+              initialSize="2"
+              maxIdle="5"
+              testOnBorrow="true"
+              removeAbandonedOnBorrow="true"
+              testWhileIdle="true"/>
+
+</Context>

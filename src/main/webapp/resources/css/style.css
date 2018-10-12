@@ -1,0 +1,101 @@
+dl {
+    background: none repeat scroll 0 0 #FAFAFA;
+    margin: 8px 0;
+    padding: 0;
+}
+
+dt {
+    display: inline-block;
+    width: 170px;
+}
+
+dd {
+    display: inline-block;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+tr[data-userEnabled="false"] {
+    opacity: 0.3;
+}
+
+.dataTables_info {
+    display: none;
+}
+
+.fa {
+    cursor: pointer;
+}
+
+.fa-remove{
+    color: darkred;
+}
+
+.fa-pencil{
+    color: forestgreen;
+}
+
+.fa-list{
+    color: teal;
+}
+
+.error, .message {
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.error {
+    color: #a94442;
+    background-color: #f2dede;
+    border: 1px solid #ebccd1;
+}
+
+.message {
+    color: #2f9635;
+    background-color: #c6fbc2;
+    border: 1px solid #9feba6;
+}
+
+/*https://getbootstrap.com/docs/4.0/examples/sticky-footer/sticky-footer.css*/
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+.navbar-dark{
+    background-color: darkred;
+}
+
+.dropdown-menu {
+    padding: 10px!important;
+    min-width: 200px!important;
+}
+
+.lead {
+    padding-bottom: 60px;
+}
+
+.btn btn-link btn-sm {
+    paddind-top: 0px;
+    padding-bottom: 16px;
+    text-decoration: none;
+    color: lightgrey;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px; /* Set the fixed height of the footer here */
+    line-height: 60px; /* Vertically center the text there */
+    background-color: darkred
+}
+
+#restaurantInfo {
+    color: darkblue;
+}

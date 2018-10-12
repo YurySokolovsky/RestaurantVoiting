@@ -55,7 +55,6 @@ public class VoteRestController extends AbstractVoteController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<Vote> createWithLocation(@RequestParam("restaurantId") int restaurantId) {
     public ResponseEntity<Vote> createWithLocation(@RequestParam ("date") LocalDate date,
                                                    @RequestParam ("restaurantId") Integer restaurantId) throws Exception {
         if (LocalDate.now().equals(date)) {

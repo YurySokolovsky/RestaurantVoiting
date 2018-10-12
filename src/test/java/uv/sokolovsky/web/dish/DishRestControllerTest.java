@@ -8,12 +8,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import uv.sokolovsky.model.Dish;
 import uv.sokolovsky.service.DishService;
-import uv.sokolovsky.util.DateTimeUtil;
-import uv.sokolovsky.util.RestaurantUtil;
 import uv.sokolovsky.util.exception.ErrorType;
 import uv.sokolovsky.web.AbstractControllerTest;
 import uv.sokolovsky.web.json.JsonUtil;
-import uv.sokolovsky.TimingRules;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -106,9 +103,8 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetAll() throws Exception {
-        //RestaurantUtil.setId(RESTAURANT_ID);
-        //DateTimeUtil.setDate(LocalDate.now());
         mockMvc.perform(get(REST_URL)
+                .param("restaurantId", String.valueOf(RESTAURANT_ID))
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())
@@ -118,9 +114,9 @@ public class DishRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetByDate() throws Exception {
-        //RestaurantUtil.setId(RESTAURANT_ID);
         mockMvc.perform(get(REST_URL + "getDishesByDate")
                 .param("date", "2018-05-05")
+                .param("restaurantId", String.valueOf(RESTAURANT_ID))
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())
                 .andDo(print())

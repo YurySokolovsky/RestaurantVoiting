@@ -39,9 +39,10 @@ public class VoteRestController extends AbstractVoteController {
     }
 
 
-    @PutMapping(value = "/restaurantId/{restaurantId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@PathVariable("restaurantId") int restaurantId) {
-        if (DateTimeUtil.isVoitingTime(DateTimeUtil.DEFAULT_DATE)) {
+    @PutMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void update(@RequestParam ("date") LocalDate date,
+                       @RequestParam ("restaurantId") Integer restaurantId) throws Exception {
+        if (DateTimeUtil.isVoitingTime(date)) {
             Restaurant restaurant = restaurantService.get(restaurantId);
             User user = userService.get(AuthorizedUser.id());
             LocalDate currentDate = DateTimeUtil.DEFAULT_DATE;
@@ -54,13 +55,15 @@ public class VoteRestController extends AbstractVoteController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Vote> createWithLocation(@RequestParam("restaurantId") int restaurantId) {
-        if (DateTimeUtil.isVoitingTime(DateTimeUtil.DEFAULT_DATE)) {
+//    public ResponseEntity<Vote> createWithLocation(@RequestParam("restaurantId") int restaurantId) {
+    public ResponseEntity<Vote> createWithLocation(@RequestParam ("date") LocalDate date,
+                                                   @RequestParam ("restaurantId") Integer restaurantId) throws Exception {
+        if (LocalDate.now().equals(date)) {
             Restaurant restaurant = restaurantService.get(restaurantId);
             User user = userService.get(AuthorizedUser.id());
             Vote created = super.create(new Vote(restaurant, user, DateTimeUtil.DEFAULT_DATE));
             URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
-                    .path(REST_URL + "/{restaurantId}")
+                    .path(REST_URL + "/")
                     .buildAndExpand(created.getId()).toUri();
             return ResponseEntity.created(uriOfNewResource).body(created);
         } else {

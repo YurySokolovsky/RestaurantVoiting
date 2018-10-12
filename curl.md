@@ -7,10 +7,10 @@
 `curl -s http://localhost:8080/rest/votes/getVotesByDate?date=2018-05-05 --user admin@gmail.com:admin`
 
 #### Create vote for restaurant 100004
-`curl -s -X POST http://localhost:8080/rest/votes?restaurantId=100004 --user user1@yandex.ru:first_user`
+`curl -s -X POST "http://localhost:8080/rest/votes/?date=2018-10-12&restaurantId=100004" --user user1@yandex.ru:first_user`
 
 #### Update vote for restaurant 100004
-`curl -s -X PUT http://localhost:8080/rest/votes/restaurantId/100004 --user admin@gmail.com:admin`
+`curl -s -X PUT "http://localhost:8080/rest/votes/?date=2018-10-12&restaurantId=100003" --user admin@gmail.com:admin`
 ***
 
 ### OPTIONAL
@@ -64,7 +64,7 @@
 `curl -s http://localhost:8080/rest/dishes?restaurantId=100004 --user user1@yandex.ru:first_user`
 
 #### Get dishes by date for restaurant 100004
-`curl -s http://localhost:8080/rest/dishes/getDishesByDate?date=2018-05-05&restaurantId=100004 --user admin@gmail.com:admin`
+`$ curl -s "http://localhost:8080/rest/dishes/getDishesByDate?date=2018-05-05&restaurantId=100004" --user admin@gmail.com:admin`
 
 #### Get dish 100015
 `curl -s http://localhost:8080/rest/dishes/100015 --user admin@gmail.com:admin`

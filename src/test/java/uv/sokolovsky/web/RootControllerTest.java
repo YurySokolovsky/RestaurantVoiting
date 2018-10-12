@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static uv.sokolovsky.TestUtil.userAuth;
 import static uv.sokolovsky.testData.UserTestData.ADMIN;
 import static uv.sokolovsky.testData.UserTestData.USER1;
+import static uv.sokolovsky.testData.RestaurantTestData.RESTAURANT_ID;
 
 public class RootControllerTest extends AbstractControllerTest {
 
@@ -34,6 +35,7 @@ public class RootControllerTest extends AbstractControllerTest {
     @Test
     public void testDishes() throws Exception {
         mockMvc.perform(get("/dishes")
+                .param("restaurantId", String.valueOf(RESTAURANT_ID))
                 .with(userAuth(ADMIN)))
                 .andDo(print())
                 .andExpect(status().isOk())

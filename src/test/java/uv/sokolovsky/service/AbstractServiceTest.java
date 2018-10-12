@@ -16,10 +16,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import uv.sokolovsky.AllActiveProfileResolver;
-import uv.sokolovsky.Profiles;
 import uv.sokolovsky.TimingRules;
-
-import java.util.Arrays;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static uv.sokolovsky.Profiles.DATAJPA;

@@ -6,7 +6,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 import uv.sokolovsky.model.Vote;
 import uv.sokolovsky.service.VoteService;
-import uv.sokolovsky.util.DateTimeUtil;
 import uv.sokolovsky.util.RestaurantUtil;
 import uv.sokolovsky.web.AbstractControllerTest;
 import uv.sokolovsky.web.json.JsonUtil;
@@ -25,8 +24,7 @@ import static uv.sokolovsky.testData.RestaurantTestData.RESTAURANT_ID;
 
 public class VoteRestControllerTest extends AbstractControllerTest {
 
-    private static final String REST_URL = VoteRestController.REST_URL + '/';
-    private static final String REST_URL1 = REST_URL + "restaurant/";
+    private static final String REST_URL = VoteRestController.REST_URL;
 
     @Autowired
     private VoteService service;
@@ -39,23 +37,22 @@ public class VoteRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testUpdate() throws Exception {
-        //DateTimeUtil.setDate(LocalDate.now());
         Vote updated = getUpdated();
-        mockMvc.perform(put(REST_URL1 + RESTAURANT_ID)
+        mockMvc.perform(put(REST_URL + "/")
+                .param("date", LocalDate.now().toString())
                 .param("restaurantId", String.valueOf(RESTAURANT_ID))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated))
                 .with(userHttpBasic(USER2)))
                 .andExpect(status().isOk());
-
         assertMatch(service.getAllByDate(LocalDate.now()), updated, VOTE4);
     }
 
     @Test
     public void testCreate() throws Exception {
-        //DateTimeUtil.setDate(LocalDate.now());
         Vote created = getCreated();
-        ResultActions action = mockMvc.perform(post(REST_URL)
+        ResultActions action = mockMvc.perform(post(REST_URL + "/")
+                .param("date", LocalDate.now().toString())
                 .param("restaurantId", String.valueOf(RESTAURANT_ID))
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(created))
@@ -80,7 +77,7 @@ public class VoteRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void testGetByDate() throws Exception {
-        mockMvc.perform(get(REST_URL + "getVotesByDate")
+        mockMvc.perform(get(REST_URL + "/getVotesByDate")
                 .param("date", "2018-05-05")
                 .with(userHttpBasic(ADMIN)))
                 .andExpect(status().isOk())

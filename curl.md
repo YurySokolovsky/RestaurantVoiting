@@ -60,7 +60,6 @@
 
 #### FOR DISHES
 #### Get dishes (menu) for restaurant 100004
-- _**view dishes (menu)**_
 `curl -s http://localhost:8080/rest/dishes?restaurantId=100004 --user user1@yandex.ru:first_user`
 
 #### Get dishes by date for restaurant 100004

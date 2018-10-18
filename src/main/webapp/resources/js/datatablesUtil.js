@@ -82,14 +82,13 @@ function viewMenu(id){
 }
 
 function getDishes(id) {
-    if (id !== null){
         restaurantId = id;
-    }
-    $.ajax({
-        type: "GET",
-        url: "ajax/dishes/",
-        data: "restaurantId=" + restaurantId
-    }).done(updateTableByData);
+        document.cookie = "restaurantId=" + id;
+        $.ajax({
+            type: "GET",
+            url: "ajax/dishes/",
+            data: "restaurantId=" + id
+        }).done(updateTableByData);
 }
 
 function searchDishesByDate(){

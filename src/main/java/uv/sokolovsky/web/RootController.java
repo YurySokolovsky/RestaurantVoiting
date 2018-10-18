@@ -19,8 +19,10 @@ import uv.sokolovsky.util.UserUtil;
 import uv.sokolovsky.web.user.AbstractUserController;
 import uv.sokolovsky.web.util.PasswordUtil;
 
+import javax.swing.*;
 import javax.validation.Valid;
 
+import java.util.Collections;
 import java.util.List;
 
 import static uv.sokolovsky.util.DishUtil.getDishesDescriptions;
@@ -62,7 +64,10 @@ public class RootController extends AbstractUserController {
     }
 
     @GetMapping("/dishes")
-    public String dishes (@RequestParam(value="restaurantId", required = false) Integer restaurantId, ModelMap model) {
+    public String dishes (@RequestParam(value = "restaurantId", required = false) Integer restaurantId,
+                          @CookieValue(value = "restaurantId", required = false) String cookieRestaurantId,
+                          ModelMap model) {
+        restaurantId = (restaurantId == null) ? Integer.parseInt(cookieRestaurantId) : restaurantId;
         Restaurant restaurant = restaurantService.get(restaurantId);
         List<String> dishesDescriptions = getDishesDescriptions(dishService.getAll(restaurant));
         model.addAttribute("dishesDescriptions", dishesDescriptions);

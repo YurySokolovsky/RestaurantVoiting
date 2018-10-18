@@ -82,13 +82,15 @@ function viewMenu(id){
 }
 
 function getDishes(id) {
+    if (id !== null) {
         restaurantId = id;
-        document.cookie = "restaurantId=" + id;
-        $.ajax({
-            type: "GET",
-            url: "ajax/dishes/",
-            data: "restaurantId=" + id
-        }).done(updateTableByData);
+    }
+    document.cookie = "restaurantId=" + restaurantId;
+    $.ajax({
+        type: "GET",
+        url: "ajax/dishes/",
+        data: "restaurantId=" + restaurantId
+    }).done(updateTableByData);
 }
 
 function searchDishesByDate(){
@@ -116,6 +118,13 @@ function getRestaurantId () {
     if (document.getElementById("dishRestaurantId") !== undefined && document.getElementById("dishRestaurantId") !== null) {
        document.getElementById("dishRestaurantId").value = restaurantId;
     }
+}
+
+function getCookie(cookieName) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + cookieName.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ))
+    return matches ? decodeURIComponent(matches[1]) : undefined
 }
 
 var failedNote;
